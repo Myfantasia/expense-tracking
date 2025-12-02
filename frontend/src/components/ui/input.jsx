@@ -25,23 +25,22 @@ const Input = forwardRef(
         )}
 
         {/* Input */}
-        <input
-          id={id}
-          ref={ref}
-          className={clsx(
-            "block w-full rounded-md shadow-sm border outline-none",
-            sizeClasses[size],
-            className
-          )}
-          style={{
-            backgroundColor: "hsl(var(--input))",
-            borderColor: "hsl(var(--border))",
-            color: "hsl(var(--foreground))",
-            // Placeholder color (works for Tailwind CDN)
-            "--tw-placeholder-color": "hsl(var(--muted-foreground))",
-          }}
-          {...props}
-        />
+       <input
+  id={id}
+  ref={ref}
+  className={clsx(
+    "block w-full rounded-md shadow-sm",
+    sizeClasses[size],
+    className
+  )}
+  style={{
+    backgroundColor: "hsl(var(--input))",
+    borderColor: "hsl(var(--border))",
+    color: "hsl(var(--foreground))",
+  }}
+  {...props}
+/>
+
 
         {/* Error message */}
         {error && (

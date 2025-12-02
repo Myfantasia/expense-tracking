@@ -8,6 +8,7 @@ import Transactions from "./pages/transactions"
 import useStore from "./store"
 import { setAuthToken } from "./libs/apiCall"
 import { Toaster } from "sonner"
+import Navbar from "./components/ui/navbar"
 
 const RootLayout = () => {
   const {user} = useStore((state) => state);
@@ -17,6 +18,7 @@ const RootLayout = () => {
 
   return !user ? (<Navigate to="/sign-in" replace= {true} />) :
   (<>
+     <Navbar/>
      <div className="min-h[cal(100vh-100px)]">
       <Outlet />
      </div>
@@ -41,7 +43,7 @@ function App() {
           <Route path="/overview" element={ < Dashboard /> } />
           <Route path="/transactions" element={ < Transactions /> } />
           <Route path="/settings" element={ < Settings /> } />
-          <Route path="/account" element={ < AccountPage /> } />
+          <Route path="/accounts" element={ < AccountPage /> } />
         </Route>
 
 
