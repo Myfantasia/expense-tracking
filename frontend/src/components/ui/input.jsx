@@ -15,39 +15,31 @@ const Input = forwardRef(
         {label && (
           <label
             htmlFor={id}
-            className="block text-sm font-medium"
-            style={{
-              color: "hsl(var(--foreground))", // uses your Tailwind config foreground
-            }}
+            className="block text-sm font-medium text-gray-700 dark:text-gray-800"
           >
             {label}
           </label>
         )}
 
-        {/* Input */}
-       <input
-  id={id}
-  ref={ref}
-  className={clsx(
-    "block w-full rounded-md shadow-sm",
-    sizeClasses[size],
-    className
-  )}
-  style={{
-    backgroundColor: "hsl(var(--input))",
-    borderColor: "hsl(var(--border))",
-    color: "hsl(var(--foreground))",
-  }}
-  {...props}
-/>
-
+        {/* Input - IMPORTANT: Removed CSS variables */}
+        <input
+          id={id}
+          ref={ref}
+          className={clsx(
+            "block w-full rounded-md shadow-sm",
+            "bg-transparent border border-gray-300 dark:border-gray-800",
+            "text-gray-700 dark:text-gray-700 placeholder-gray-400 dark:placeholder-gray-600",
+            "focus:ring-1 focus:ring-blue-500 outline-none",
+            "text-sm md:text-base", // Responsive text
+            sizeClasses[size],
+            className
+          )}
+          {...props}
+        />
 
         {/* Error message */}
         {error && (
-          <p
-            className="mt-2 text-sm"
-            style={{ color: "hsl(var(--destructive))" }} // error color
-          >
+          <p className="mt-2 text-sm text-red-600 dark:text-red-400">
             {error}
           </p>
         )}
@@ -59,4 +51,3 @@ const Input = forwardRef(
 Input.displayName = "Input";
 
 export default Input;
-

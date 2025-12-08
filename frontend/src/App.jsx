@@ -9,6 +9,7 @@ import useStore from "./store"
 import { setAuthToken } from "./libs/apiCall"
 import { Toaster } from "sonner"
 import Navbar from "./components/ui/navbar"
+import { useEffect } from "react"
 
 const RootLayout = () => {
   const {user} = useStore((state) => state);
@@ -27,6 +28,16 @@ const RootLayout = () => {
 }
 
 function App() {
+
+  const { theme } = useStore((state) => state);
+
+  useEffect(() => {
+    if(theme === 'dark'){
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [theme]);
 
   return <main>
     <div className="w-full min-h-screen px-6 md:px-20"

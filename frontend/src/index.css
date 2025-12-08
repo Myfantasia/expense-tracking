@@ -1,21 +1,64 @@
+/* =========================
+   CUSTOM INPUT STYLES
+   (Responsive-friendly)
+   ========================= */
+
 .inputStyles {
-  @apply bg-transparent appearance-none border rounded w-full py-2 px-3 text-foreground outline-none ring-blue-500;
-  border-color: hsl(var(--border));
-  color: hsl(var(--foreground));
+  @apply bg-transparent appearance-none 
+         border border-gray-300 dark:border-gray-800 
+         rounded w-full py-2 px-3 
+         text-gray-700 dark:text-gray-500 
+         outline-none 
+         focus:ring-1 ring-blue-500 
+         dark:placeholder:text-gray-700;
+
+  /* Mobile default text size */
+  font-size: 0.875rem; /* text-sm */
 }
 
+@media (min-width: 768px) {
+  .inputStyles {
+    font-size: 1rem; /* text-base on md+ */
+  }
+}
 
 .labelStyles {
-  @apply block text-gray-700 dark:text-gray-400 text-sm md:text-base mb-2;
+  @apply block text-gray-700 dark:text-gray-400 mb-2;
+
+  /* Default = small on mobile */
+  font-size: 0.875rem;
 }
 
+@media (min-width: 768px) {
+  .labelStyles {
+    font-size: 1rem; /* Medium screen and above */
+  }
+}
+
+/* Generic input styling if used elsewhere */
 .inputStyle {
-  @apply w-full text-sm dark:bg-transparent dark:outline-none;
-  border-color: hsl(var(--border));
-  color: hsl(var(--foreground));
+  @apply w-full text-sm 
+         border dark:border-gray-800 
+         dark:bg-transparent 
+         dark:placeholder:text-gray-700 
+         dark:text-gray-400 
+         dark:outline-none;
+
+  /* Responsive font */
+  font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  .inputStyle {
+    font-size: 1rem;
+  }
 }
 
 
+/* =========================
+   CSS VARIABLES (Light & Dark)
+   DO NOT CHANGE — Works with Tailwind CDN
+   ========================= */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -50,4 +93,31 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
   }
+}
+
+
+/* Add this to the end of your index.css file */
+html.light {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* Force light mode styles when dark class is not present */
+html:not(.dark) .dark\\:border-gray-800 {
+  border-color: #d1d5db !important; /* gray-300 */
+}
+
+html:not(.dark) .dark\\:bg-transparent {
+  background-color: transparent !important;
+}
+
+html:not(.dark) .dark\\:text-gray-400 {
+  color: #374151 !important; /* gray-700 */
+}
+
+html:not(.dark) .dark\\:placeholder\\:text-gray-700::placeholder {
+  color: #6b7280 !important; /* gray-500 */
 }

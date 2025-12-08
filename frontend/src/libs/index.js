@@ -40,7 +40,10 @@ export const getDateSevenDaysAgo = () => {
 
 export async function fetchCountries() {
   try {
-    const response = await fetch("https://restcountries.com/v3.1/all");
+    const response = await fetch(
+      "https://restcountries.com/v3.1/all?fields=name,flags,currencies"
+    );
+
     const data = await response.json();
 
     if (response.ok) {
@@ -55,11 +58,7 @@ export async function fetchCountries() {
         };
       });
 
-      const sortedCountries = countries.sort((a, b) =>
-        a.country.localeCompare(b.country)
-      );
-
-      return sortedCountries;
+      return countries.sort((a, b) => a.country.localeCompare(b.country));
     } else {
       console.error(`Error: ${data.message}`);
       return [];
@@ -69,6 +68,7 @@ export async function fetchCountries() {
     return [];
   }
 }
+
 
 export function generateAccountNumber() {
   let accountNumber = "";
