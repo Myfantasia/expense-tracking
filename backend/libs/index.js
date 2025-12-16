@@ -23,7 +23,7 @@ export const createJWT = (id) => {
         userId: id, 
     },
     process.env.JWT_SECRET,
-    { expiresIn: '1d' });
+    { expiresIn: '4h' });
 }
 
 export function getMonthName(index) {

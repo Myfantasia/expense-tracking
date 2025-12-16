@@ -33,6 +33,10 @@ const Settingsform = () => {
     const [ isLoading, setIsLoading ] = useState(false);
 
     const onSubmit = async (values) => {
+
+      console.log('🔵 SAVE BUTTON CLICKED - Testing');
+      console.log('📋 Form values:', values);
+      console.log('🌍 Selected country:', selectedCountry);
       try {
         setIsLoading(true)
         const newData = {
@@ -41,12 +45,19 @@ const Settingsform = () => {
           currency: selectedCountry.currency,
         }
 
+        console.log('📤 Data to send to API:', newData);
+
         const {data: res} = await api.put(`/user`, newData)
+
+        console.log('✅ API Response:', res);
 
         if(res?.user) {
           const newUser = { ...res.user, token: user.token}
           localStorage.setItem('user', JSON.stringify(newUser))
           
+          console.log('💾 Updated user in localStorage:', newUser);
+      
+          console.log('🔄 Updating store with setCredentials...');
           // FIX: Update store with new user data
           setCredentials(newUser); // This updates your Zustand store
           
@@ -54,6 +65,7 @@ const Settingsform = () => {
         }
       } catch (error) {
         console.error('Something went wrong', error)
+        console.log('📊 Error details:', error.response?.data);
         toast.error(error?.response?.data?.message || error.message)
       } finally {
         setIsLoading(false)
@@ -227,7 +239,7 @@ const Countries = () => {
                label='First Name'
                type='text'
                placeholder='John'
-               register={register('firstname', {
+               {...register('firstname', {
                 required: 'First Name is required!'
                })}
                errors={errors.firstname ? errors.firstname.message : ''}
@@ -245,7 +257,7 @@ const Countries = () => {
                label='Email'
                type='text'
                placeholder='example@example.com'
-               register={register('email', {
+               {...register('email', {
                 required: 'Email is required!'
                })}
                errors={errors.email ? errors.email.message : ''}
@@ -275,7 +287,7 @@ const Countries = () => {
                label='Last Name'
                type='text'
                placeholder='Doe'
-               register={register('lastname', {
+               {...register('lastname', {
                 required: 'Last Name is required!'
                })}
                errors={errors.lastname ? errors.lastname.message : ''}
@@ -293,7 +305,7 @@ const Countries = () => {
                label='Phone'
                type='text'
                placeholder='0723592416'
-               register={register('contact', {
+               {...register('contact', {
                 required: 'Phone is required!'
                })}
                errors={errors.contact ? errors.contact.message : ''}  // FIXED: errors.contact (not errors.contct)
@@ -399,7 +411,7 @@ const Countries = () => {
               toast.info('Form reset to original values');
             }}
             disabled={isLoading}
-            className='px-6 cursor-pointer text-black'
+            className='px-6 cursor-pointer bg-black text-white'
           >
             Reset
           </Button>

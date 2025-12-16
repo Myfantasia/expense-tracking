@@ -17,12 +17,12 @@ const links = [
 ];
 
 const UserMenu = () => {
-  const { user, setCredentails } = useStore((state) => state);
+  const { user, setCredentials } = useStore((state) => state);
   const navigate = useNavigate();
 
   const handleSingout = () => {
     localStorage.removeItem("user");
-    setCredentails(null);
+    setCredentials(null);
     navigate("/sign-in");
   };
 

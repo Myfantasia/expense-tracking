@@ -21,7 +21,7 @@ const LoginSchema = z.object({
 })
 
 const SignIn = () => {
-  const { user, setCrentials } = useStore(state=> state);
+  const { user, setCredentials } = useStore(state=> state);
   const {
     register,
     handleSubmit,
@@ -51,7 +51,7 @@ const SignIn = () => {
 
         localStorage.setItem('user', JSON.stringify(userInfo));
 
-        setCrentials(userInfo);
+        setCredentials(userInfo);
 
         setTimeout(() => {
           navigate('/overview');
